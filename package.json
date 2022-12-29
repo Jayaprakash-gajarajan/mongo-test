@@ -1,0 +1,23 @@
+{
+  "name": "firstdb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mongo-commands.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node sum.js",
+    "dev": "nodemon sum.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
