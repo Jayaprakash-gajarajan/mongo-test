@@ -109,7 +109,7 @@ const movie = [
 app.use(express.json())
 // Get method is used for read the data .
 app.get("/", (request, response) => {
-  response.send("🙋❤️😍!!");
+  response.send("🙋👩‍💻👩‍💻❤️😍!!");
 });
 app.get("/movies", async(request, response) => {
   if(request.query.rating){
