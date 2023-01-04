@@ -1,5 +1,6 @@
-import express from "express"
+import express from "express";
 import { client } from "../index.js";
+import { auth } from "../middlewar/auth.js";
 import { getMovies, postMovies, getMovieById, deleteMovieById } from "../services/movies.service.js";
 const router = express.Router();
 const movie = [
@@ -80,7 +81,7 @@ const movie = [
 router.use(express.json())
 // Get method is used for read the data .
 
-router.get("/", async (request, response) => {
+router.get("/",async (request, response) => {
   if (request.query.rating) {
     request.query.rating = +request.query.rating;
   }

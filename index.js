@@ -24,6 +24,7 @@ import { Db, MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
 import moviesRouter from "./routes/movies.route.js"
 import userRouter from "./routes/user.route.js"
+import cors from "cors"
 dotenv.config();
 const app=express();
 
@@ -34,7 +35,8 @@ const client = new MongoClient(MONGO_URL);//dail
 //top level await(if outside the function also used its new feature)
 await client.connect();//call
 console.log("mongo is connected");
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 
 app.get("/", function (request,response) {
   response.send("🙋👩‍💻👩‍💻❤️😍!!");

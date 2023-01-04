@@ -47,6 +47,7 @@ router.post("/login", async (request, response) => {
   
   if(isPasswordCheck){
     const token=jwt.sign({id:userFromDB._id},process.env.SECRET_KEY);
+    console.log(token);
     response.send({message:"SucessFul login",token:token});
   }
   else{
