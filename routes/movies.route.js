@@ -1,7 +1,7 @@
 import express from "express";
 import { client } from "../index.js";
 import { auth } from "../middlewar/auth.js";
-import { getMovies, postMovies, getMovieById, deleteMovieById } from "../services/movies.service.js";
+import { getMovies, postMovies, updateMovieById, deleteMovieById,getMovieById } from "../services/movies.service.js";
 const router = express.Router();
 const movie = [
   {
@@ -107,16 +107,13 @@ router.get("/:id", async (request, response) => {
   // console.log(request.params, id)
   // const movie = movie.find(mv => mv.id == id)
   // console.log(movie)
-  const movie = await client
-    .db("test")
-    .collection("movie")
-    .findOne({ id: id })
+  const movie = await getMovieById(id)
   movie ? response.send(movie) : response.send({ message: "MOVIE NOT FUND" });
 });
 router.put("/:id", async function (request, response) {
   const { id } = request.params;
   const data = request.body;
-  const movie = await getMovieById(id, data)
+  const movie = await updateMovieById(id, data)
   response.send(movie)
 });
 router.delete("/:id", async function (request, response) {
@@ -139,5 +136,6 @@ router.delete("/:id", async function (request, response) {
 // })
 
 export default router;
+
 
 
