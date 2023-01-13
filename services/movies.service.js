@@ -4,13 +4,13 @@ export async function deleteMovieById(id) {
     return await client
         .db("test")
         .collection("movie")
-        .deleteOne({ id: id });
+        .deleteOne({ _id: ObjectId(id)});
 }
 export async function updateMovieById(id, data) {
     return await client
         .db("test")
         .collection("movie")
-        .updateOne({ id:id }, { $set: data });
+        .updateOne({ _id:ObjectId(id) }, { $set: data });
 }
 
 export async function getMovieById(id) {

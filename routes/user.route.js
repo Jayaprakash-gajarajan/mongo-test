@@ -8,7 +8,7 @@ router.use(express.json())
 import bcrypt from "bcrypt"
 // Get method is used for read the data .
 
-
+// signup is used for if the user is same not allowed and user is new generate the hashpassword and token
 router.post("/signup", async (request, response) => {
   const {username,password} = request.body;
   // console.log(data);
@@ -26,19 +26,23 @@ response.send({message:"password must be at 8 character"})
     const result=await createUser({
       username:username,
       password:hashpassword,
+  // default all user roleId set by one
+      roleId:1,
     })
      response.send(result);
   }
   
 })
+//login is use for particular data form user and check the password and password is wrong 
+//retry and password is right to give the data to the user
 router.post("/login", async (request, response) => {
   const {username,password} = request.body;
   // console.log(data);
   // const movie = await postMovies(data);
   const userFromDB=await getUserByName(username);
-  console.log(!userFromDB);
+  console.log(userFromDB);
   if(!userFromDB){
-    response.send({message:"Invalid data"})
+    response.status(401).send({message:"Invalid data"})
   }
   else{
     const storedDBPassword=userFromDB.password;
@@ -48,10 +52,10 @@ router.post("/login", async (request, response) => {
   if(isPasswordCheck){
     const token=jwt.sign({id:userFromDB._id},process.env.SECRET_KEY);
     console.log(token);
-    response.send({message:"SucessFul login",token:token});
+    response.send({message:"SucessFul login",token:token,roleId:userFromDB.roleId});
   }
   else{
-    response.send({message:"invalid data"});
+    response.status(401).send({message:"invalid data"});
   }
 }
   
